@@ -18,13 +18,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.awakeFromNib()
     }
 
+    @IBOutlet var newNoteTextField : UITextField!
+    
+    @IBAction func newNoteDidEndEditing(sender : UITextField){
+        self.insertNewObject(sender)
+        newNoteTextField.text=""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+//        self.navigationItem.rightBarButtonItem = addButton
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +46,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
              
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+        newManagedObject.setValue(newNoteTextField.text, forKey: "digest")
         newManagedObject.setValue(NSDate(), forKey: "timeStamp")
              
         // Save the context.
@@ -101,7 +109,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel.text = object.valueForKey("timeStamp")!.description
+        cell.textLabel.text = object.valueForKey("digest")!.description
     }
 
     // MARK: - Fetched results controller

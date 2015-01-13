@@ -413,6 +413,7 @@
 				AE57D01C1A6239FD003A2EB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AE57D01D1A6239FD003A2EB6 /* Build configuration list for PBXNativeTarget "roboTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +422,7 @@
 				AE57D01F1A6239FD003A2EB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

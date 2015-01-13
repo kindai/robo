@@ -130,7 +130,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="28"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjq-JR-abk">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjq-JR-abk">
                                                     <rect key="frame" x="4" y="21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -142,7 +142,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="24x-5q-ZPK" id="nss-NX-LsB"/>
+                                    <outlet property="dataSource" destination="Ah7-4n-0Wa" id="IJ2-N6-8GK"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -157,7 +157,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
-                <customObject id="24x-5q-ZPK" customClass="DetailViewController" customModule="robo" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="661" y="77"/>
         </scene>

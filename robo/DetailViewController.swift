@@ -58,9 +58,11 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         if let _tags = self.tags {
             let tagArray = [_tags.allObjects] as NSArray
-            let object = tagArray.objectAtIndex(indexPath.item)
-            var label = cell.viewWithTag(0) as UILabel
-            label.text = object.valueForKey("name")?.value
+            let object = tagArray[indexPath.row]
+            let label = cell.viewWithTag(100) as UILabel?
+            if let _label=label {
+                _label.text = object.valueForKey("name")?.value
+            }
         }
         
     }
@@ -75,7 +77,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
                 label.text = detail.valueForKey("timeStamp")!.description
             }
             if let tagColView = self.tagCollectionView{
-                self.tagCollectionView.reloadData()
+                tagColView.reloadData()
             }
         }
     }

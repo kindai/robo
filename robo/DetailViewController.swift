@@ -17,6 +17,8 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     @IBOutlet weak var newTagTextField: UITextField!
     var tags: NSSet!
     
+    let reuseIdentifier = "cvCell"
+    
 //    override init(){
 //        super.init()
 //    }
@@ -43,25 +45,23 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cvCell", forIndexPath: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int{
-        if let _tags = tags{
-            return _tags.count
-        }
-        return 0
+        return 1
     }
     
     func configureCell(cell: UICollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         if let _tags = self.tags {
-            let tagArray = [_tags.allObjects] as NSArray
+            let tagArray = _tags.allObjects as NSArray
             let object = tagArray[indexPath.row]
-            let label = cell.viewWithTag(100) as UILabel?
-            if let _label=label {
-                _label.text = object.valueForKey("name")?.value
+            if let _cell=cell as? NoteCell {
+                if let _label = _cell.titleLabel{
+                    _label.text = object.valueForKey("name")?.description
+                }
             }
         }
         
@@ -87,7 +87,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         // Do any additional setup after loading the view, typically from a nib.
         let completeBtn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "detailEndEditing:")
         self.navigationItem.rightBarButtonItem = completeBtn
-        self.tagCollectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cvCell")
+        //self.tagCollectionView.registerClass(NoteCell.self, forCellWithReuseIdentifier: "cvCell")
         self.configureView()
     }
 
@@ -134,6 +134,8 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         
         self.configureView()
     }
+    
+    
 
 }
 

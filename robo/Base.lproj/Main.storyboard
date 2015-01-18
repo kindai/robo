@@ -12,7 +12,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pGg-6v-bdr" kind="relationship" relationship="rootViewController" id="z7h-CR-U2r"/>
+                        <segue destination="Ah7-4n-0Wa" kind="relationship" relationship="rootViewController" id="Xvi-7V-1Ne"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
@@ -65,7 +65,7 @@
                             <outlet property="delegate" destination="pGg-6v-bdr" id="Y6K-Cp-Qkv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="tQt-TN-PWz"/>
+                    <navigationItem key="navigationItem" title="目录" id="tQt-TN-PWz"/>
                     <connections>
                         <outlet property="newNoteTextField" destination="u9s-AY-h7S" id="t7z-UK-I0C"/>
                     </connections>
@@ -154,12 +154,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
+                    <navigationItem key="navigationItem" title="想法" id="cra-N8-TIN"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="u2U-xn-Tos" id="QWk-h9-CV7"/>
                         <outlet property="detailTimestampLabel" destination="YNW-jd-4al" id="xqW-VW-WGS"/>
                         <outlet property="newTagTextField" destination="p5y-Ah-atq" id="pOo-Um-FwX"/>
                         <outlet property="tagCollectionView" destination="FtN-nn-USM" id="psd-Uy-7f6"/>
+                        <segue destination="pGg-6v-bdr" kind="show" identifier="showMaster" id="ylP-I0-lYm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
@@ -167,4 +168,7 @@
             <point key="canvasLocation" x="661" y="77"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="jUr-3t-vfg"/>
+    </inferredMetricsTieBreakers>
 </document>

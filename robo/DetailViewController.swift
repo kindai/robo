@@ -15,6 +15,8 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     @IBOutlet weak var detailTimestampLabel: UILabel!
     @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var newTagTextField: UITextField!
+    
+    var managedObjectContext: NSManagedObjectContext? = nil
     var tags: NSSet!
     
     let reuseIdentifier = "cvCell"
@@ -87,6 +89,14 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         // Do any additional setup after loading the view, typically from a nib.
         let completeBtn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "detailEndEditing:")
         self.navigationItem.rightBarButtonItem = completeBtn
+        
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as AppDelegate
+        self.managedObjectContext = appDelegate.managedObjectContext!
+        
+        if self.detailItem==nil{
+            self.detailItem=newObject()
+        }
         //self.tagCollectionView.registerClass(NoteCell.self, forCellWithReuseIdentifier: "cvCell")
         self.configureView()
     }
@@ -95,26 +105,41 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func newObject() -> NSManagedObject{
+        let context = self.managedObjectContext
+        let entity = NSEntityDescription.entityForName("Notes", inManagedObjectContext: self.managedObjectContext!) as NSEntityDescription?
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName((entity?.name)!, inManagedObjectContext: context!) as NSManagedObject
+        
+        // If appropriate, configure the new managed object.
+        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+        newManagedObject.setValue("empty", forKey: "digest")
+        newManagedObject.setValue(NSDate(), forKey: "timeStamp")
+        
+        return newManagedObject
+    }
 
     func detailEndEditing(sender: UITextView){
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
         
         if let detail: AnyObject = self.detailItem {
             if let label = self.detailDescriptionLabel {
                 self.detailItem?.setValue(label.text, forKey: "digest")
                 self.detailItem?.setValue(NSDate(), forKey: "timeStamp")
             }
+        }else{
+            self.performSegueWithIdentifier("showMaster", sender: self)
         }
         
         var error: NSError?
-        if !managedContext.save(&error) {
+        if !(self.managedObjectContext?.save(&error) != nil) {
             println("Could not save \(error), \(error?.userInfo)")
         }
         
-        self.navigationController?.popViewControllerAnimated(true)
+        if let preView = self.navigationController?.popViewControllerAnimated(true){
+            return
+        }
+        
+        self.performSegueWithIdentifier("showMaster", sender: self)
     }   
     
     @IBAction func addNewTag(){

@@ -61,9 +61,8 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
             let tagArray = _tags.allObjects as NSArray
             let object = tagArray[indexPath.row]
             if let _cell=cell as? NoteCell {
-                if let _label = _cell.titleLabel{
-                    _label.text = object.valueForKey("name")?.description
-                }
+                _cell.dataObject = object as NSManagedObject
+//                _cell.removeBtn.tag = indexPath.row
             }
         }
         
@@ -143,9 +142,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     }   
     
     @IBAction func addNewTag(){
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as AppDelegate
-        let context = appDelegate.managedObjectContext!
+        let context = self.managedObjectContext!
         let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Tags", inManagedObjectContext: context) as NSManagedObject
         newManagedObject.setValue(newTagTextField.text, forKey: "name")
         let _tags = self.detailItem?.mutableSetValueForKey("tags")
@@ -160,6 +157,19 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         self.configureView()
     }
     
+    @IBAction func delTag(sender:AnyObject){
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as AppDelegate
+        let cell = (sender.superview as UIView?)?.superview as NoteCell
+        let _tags = self.detailItem?.mutableSetValueForKey("tags")
+        _tags?.removeObject(cell.dataObject!)
+        var error: NSError? = nil
+        if !self.managedObjectContext!.save(&error) {
+            abort()
+        }
+
+        self.configureView()
+    }
     
 
 }

@@ -133,10 +133,21 @@
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGU-9b-TJn">
+                                                    <rect key="frame" x="33" y="-2" width="30" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                    <state key="normal" title="X">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="delTag:" destination="Ah7-4n-0Wa" eventType="touchUpInside" id="wea-I5-3bN"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="removeBtn" destination="OGU-9b-TJn" id="3lL-Ad-Dl6"/>
                                             <outlet property="titleLabel" destination="Tjq-JR-abk" id="tK7-oh-dTs"/>
                                         </connections>
                                     </collectionViewCell>

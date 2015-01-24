@@ -6,7 +6,6 @@
         <attribute name="timeStamp" optional="YES" attributeType="Date">
             <userInfo/>
         </attribute>
-        <relationship name="subnotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notes" inverseName="subnotes" inverseEntity="Notes" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tags" inverseName="notes" inverseEntity="Tags" syncable="YES"/>
         <userInfo/>
     </entity>
@@ -15,7 +14,7 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notes" inverseName="tags" inverseEntity="Notes" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Notes" positionX="261" positionY="189" width="128" height="120"/>
-        <element name="Tags" positionX="261" positionY="207" width="128" height="73"/>
+        <element name="Notes" positionX="261" positionY="189" width="128" height="103"/>
+        <element name="Tags" positionX="261" positionY="207" width="128" height="75"/>
     </elements>
 </model>

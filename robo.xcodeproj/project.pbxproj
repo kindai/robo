@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE23B2D91A73436700BFF00F /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE23B2D81A73436700BFF00F /* NotesViewController.swift */; };
+		AE23B2DB1A73460800BFF00F /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE23B2DA1A73460800BFF00F /* NoteCell.swift */; };
 		AE57CFFC1A6239FD003A2EB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE57CFFB1A6239FD003A2EB6 /* AppDelegate.swift */; };
 		AE57CFFF1A6239FD003A2EB6 /* robo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE57CFFD1A6239FD003A2EB6 /* robo.xcdatamodeld */; };
 		AE57D0011A6239FD003A2EB6 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE57D0001A6239FD003A2EB6 /* MasterViewController.swift */; };
@@ -15,7 +17,7 @@
 		AE57D0081A6239FD003A2EB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE57D0071A6239FD003A2EB6 /* Images.xcassets */; };
 		AE57D00B1A6239FD003A2EB6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE57D0091A6239FD003A2EB6 /* LaunchScreen.xib */; };
 		AE57D0171A6239FD003A2EB6 /* roboTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE57D0161A6239FD003A2EB6 /* roboTests.swift */; };
-		AEFBCD2F1A6A8F9B0016CD49 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBCD2E1A6A8F9B0016CD49 /* NoteCell.swift */; };
+		AEFBCD2F1A6A8F9B0016CD49 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBCD2E1A6A8F9B0016CD49 /* TagCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE23B2D81A73436700BFF00F /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		AE23B2DA1A73460800BFF00F /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		AE57CFF61A6239FD003A2EB6 /* robo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = robo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE57CFFA1A6239FD003A2EB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE57CFFB1A6239FD003A2EB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +45,7 @@
 		AE57D0101A6239FD003A2EB6 /* roboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = roboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE57D0151A6239FD003A2EB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE57D0161A6239FD003A2EB6 /* roboTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roboTests.swift; sourceTree = "<group>"; };
-		AEFBCD2E1A6A8F9B0016CD49 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		AEFBCD2E1A6A8F9B0016CD49 /* TagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +87,7 @@
 		AE57CFF81A6239FD003A2EB6 /* robo */ = {
 			isa = PBXGroup;
 			children = (
-				AEFBCD2E1A6A8F9B0016CD49 /* NoteCell.swift */,
+				AEFBCD2E1A6A8F9B0016CD49 /* TagCell.swift */,
 				AE57CFFB1A6239FD003A2EB6 /* AppDelegate.swift */,
 				AE57D0001A6239FD003A2EB6 /* MasterViewController.swift */,
 				AE57D0021A6239FD003A2EB6 /* DetailViewController.swift */,
@@ -92,6 +96,8 @@
 				AE57D0091A6239FD003A2EB6 /* LaunchScreen.xib */,
 				AE57CFFD1A6239FD003A2EB6 /* robo.xcdatamodeld */,
 				AE57CFF91A6239FD003A2EB6 /* Supporting Files */,
+				AE23B2D81A73436700BFF00F /* NotesViewController.swift */,
+				AE23B2DA1A73460800BFF00F /* NoteCell.swift */,
 			);
 			path = robo;
 			sourceTree = "<group>";
@@ -223,8 +229,10 @@
 			files = (
 				AE57CFFC1A6239FD003A2EB6 /* AppDelegate.swift in Sources */,
 				AE57CFFF1A6239FD003A2EB6 /* robo.xcdatamodeld in Sources */,
-				AEFBCD2F1A6A8F9B0016CD49 /* NoteCell.swift in Sources */,
+				AE23B2D91A73436700BFF00F /* NotesViewController.swift in Sources */,
+				AEFBCD2F1A6A8F9B0016CD49 /* TagCell.swift in Sources */,
 				AE57D0011A6239FD003A2EB6 /* MasterViewController.swift in Sources */,
+				AE23B2DB1A73460800BFF00F /* NoteCell.swift in Sources */,
 				AE57D0031A6239FD003A2EB6 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

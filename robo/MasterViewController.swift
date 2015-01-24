@@ -18,12 +18,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.awakeFromNib()
     }
 
-    @IBOutlet var newNoteTextField : UITextField!
-    
-    @IBAction func newNoteDidEndEditing(sender : UITextField){
-        self.insertNewObject(sender)
-        newNoteTextField.text=""
-    }
+//    @IBOutlet var newNoteTextField : UITextField!
+//    
+//    @IBAction func newNoteDidEndEditing(sender : UITextField){
+//        self.insertNewObject(sender)
+//        newNoteTextField.text=""
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,25 +42,25 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(sender: AnyObject) {
-        let context = self.fetchedResultsController.managedObjectContext
-        let entity = self.fetchedResultsController.fetchRequest.entity!
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
-             
-        // If appropriate, configure the new managed object.
-        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue(newNoteTextField.text, forKey: "digest")
-        newManagedObject.setValue(NSDate(), forKey: "timeStamp")
-             
-        // Save the context.
-        var error: NSError? = nil
-        if !context.save(&error) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
-    }
+//    func insertNewObject(sender: AnyObject) {
+//        let context = self.fetchedResultsController.managedObjectContext
+//        let entity = self.fetchedResultsController.fetchRequest.entity!
+//        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
+//             
+//        // If appropriate, configure the new managed object.
+//        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+//        newManagedObject.setValue(newNoteTextField.text, forKey: "digest")
+//        newManagedObject.setValue(NSDate(), forKey: "timeStamp")
+//             
+//        // Save the context.
+//        var error: NSError? = nil
+//        if !context.save(&error) {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            //println("Unresolved error \(error), \(error.userInfo)")
+//            abort()
+//        }
+//    }
 
     // MARK: - Segues
 
@@ -68,7 +68,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
             let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-            (segue.destinationViewController as DetailViewController).detailItem = object
+            (segue.destinationViewController as NotesViewController).tag = object
             }
         }
     }
@@ -112,7 +112,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel.text = object.valueForKey("digest")!.description
+        cell.textLabel.text = object.valueForKey("name")!.description
     }
 
     // MARK: - Fetched results controller
@@ -124,14 +124,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Notes", inManagedObjectContext: self.managedObjectContext!)
+        let entity = NSEntityDescription.entityForName("Tags", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timeStamp", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
         let sortDescriptors = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]

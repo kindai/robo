@@ -1,16 +1,14 @@
 //
-//  NoteCell.swift
+//  TagCell.swift
 //  robo
 //
-//  Created by kin dai on 15/1/24.
+//  Created by kin dai on 15/1/17.
 //  Copyright (c) 2015年 YUAN LIN. All rights reserved.
 //
-
-import Foundation
 import UIKit
 import CoreData
 
-class NoteCell : UICollectionViewCell {
+class TagCell : UICollectionViewCell {
     
     var dataObject:NSManagedObject?{
         didSet{

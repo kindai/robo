@@ -27,15 +27,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <textField key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="u9s-AY-h7S">
-                            <rect key="frame" x="0.0" y="-30" width="600" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <action selector="newNoteDidEndEditing:" destination="pGg-6v-bdr" eventType="editingDidEndOnExit" id="Cpe-hW-fgk"/>
-                            </connections>
-                        </textField>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="2pz-XF-uhl" style="IBUITableViewCellStyleDefault" id="m0d-ak-lc9">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -55,7 +46,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="Ah7-4n-0Wa" kind="show" identifier="showDetail" id="jUr-3t-vfg"/>
+                                    <segue destination="oPE-xj-Swv" kind="show" identifier="showDetail" id="F2g-z8-Xwo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -66,13 +57,48 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="目录" id="tQt-TN-PWz"/>
-                    <connections>
-                        <outlet property="newNoteTextField" destination="u9s-AY-h7S" id="t7z-UK-I0C"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100" y="775"/>
+            <point key="canvasLocation" x="552" y="77"/>
+        </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="pSY-Q2-jPm">
+            <objects>
+                <collectionViewController id="oPE-xj-Swv" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="tgi-R7-uSO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lnx-of-ymh">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="fsU-Pq-zvJ" customClass="NoteCell" customModule="robo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="Ah7-4n-0Wa" kind="show" id="frj-M2-bMF"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="oPE-xj-Swv" id="Wim-qc-Y8f"/>
+                            <outlet property="delegate" destination="oPE-xj-Swv" id="5po-dA-TXv"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rTz-GA-HKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213" y="77"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Cn3-H9-jdl">
@@ -117,7 +143,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="cvCell" id="7aJ-sg-Igx" customClass="NoteCell" customModule="robo" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="cvCell" id="7aJ-sg-Igx" customClass="TagCell" customModule="robo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -140,15 +166,15 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="delTag:" destination="Ah7-4n-0Wa" eventType="touchUpInside" id="wea-I5-3bN"/>
+                                                        <action selector="delTag:" destination="Ah7-4n-0Wa" eventType="touchUpInside" id="h0N-hu-IOy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="removeBtn" destination="OGU-9b-TJn" id="3lL-Ad-Dl6"/>
-                                            <outlet property="titleLabel" destination="Tjq-JR-abk" id="tK7-oh-dTs"/>
+                                            <outlet property="removeBtn" destination="OGU-9b-TJn" id="eP6-fc-keo"/>
+                                            <outlet property="titleLabel" destination="Tjq-JR-abk" id="eOP-z3-oYv"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -176,10 +202,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="661" y="77"/>
+            <point key="canvasLocation" x="1865" y="77"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jUr-3t-vfg"/>
+        <segue reference="frj-M2-bMF"/>
     </inferredMetricsTieBreakers>
 </document>

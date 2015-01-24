@@ -47,7 +47,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as TagCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -60,7 +60,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         if let _tags = self.tags {
             let tagArray = _tags.allObjects as NSArray
             let object = tagArray[indexPath.row]
-            if let _cell=cell as? NoteCell {
+            if let _cell=cell as? TagCell {
                 _cell.dataObject = object as NSManagedObject
 //                _cell.removeBtn.tag = indexPath.row
             }
@@ -96,7 +96,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         if self.detailItem==nil{
             self.detailItem=newObject()
         }
-        //self.tagCollectionView.registerClass(NoteCell.self, forCellWithReuseIdentifier: "cvCell")
+        //self.tagCollectionView.registerClass(TagCell.self, forCellWithReuseIdentifier: "cvCell")
         self.configureView()
     }
 
@@ -143,12 +143,29 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     
     @IBAction func addNewTag(){
         let context = self.managedObjectContext!
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Tags", inManagedObjectContext: context) as NSManagedObject
-        newManagedObject.setValue(newTagTextField.text, forKey: "name")
-        let _tags = self.detailItem?.mutableSetValueForKey("tags")
-        _tags?.addObject(newManagedObject)
+        let request = NSFetchRequest()
+        let tagEntity = NSEntityDescription.entityForName("Tags", inManagedObjectContext: context)
+        request.entity = NSEntityDescription.entityForName("Tags", inManagedObjectContext: context)
+        
+        request.predicate = NSPredicate(format: "name = %@", newTagTextField.text!)
         
         var error: NSError? = nil
+        if let mutableFetchResults = context.executeFetchRequest(request, error: &error) {
+            //non-existing
+            var targetTag:NSManagedObject
+            if mutableFetchResults.count==0 {
+                targetTag = NSEntityDescription.insertNewObjectForEntityForName("Tags", inManagedObjectContext: context) as NSManagedObject
+                targetTag.setValue(newTagTextField.text, forKey: "name")
+            } else {// existing
+                if mutableFetchResults.count>1 {
+                    abort()
+                }
+                targetTag = mutableFetchResults.first? as NSManagedObject
+            }
+            let _tags = self.detailItem?.mutableSetValueForKey("tags")
+            _tags?.addObject(targetTag)
+        }
+        
         if !context.save(&error) {
             abort()
         }
@@ -158,9 +175,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
     }
     
     @IBAction func delTag(sender:AnyObject){
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as AppDelegate
-        let cell = (sender.superview as UIView?)?.superview as NoteCell
+        let cell = (sender.superview as UIView?)?.superview as TagCell
         let _tags = self.detailItem?.mutableSetValueForKey("tags")
         _tags?.removeObject(cell.dataObject!)
         var error: NSError? = nil

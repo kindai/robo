@@ -33,13 +33,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         UIApplication.sharedApplication().delegate as AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext!
 
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-//        self.navigationItem.rightBarButtonItem = addButton
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewNote:")
+        self.navigationItem.rightBarButtonItem = addButton
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func insertNewNote(sender: AnyObject){
+        self.performSegueWithIdentifier("newNote", sender: self)
     }
 
 //    func insertNewObject(sender: AnyObject) {
@@ -67,8 +71,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-            (segue.destinationViewController as NotesViewController).tag = object
+                let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
+                (segue.destinationViewController as NotesViewController).tag = object
             }
         }
     }

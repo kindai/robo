@@ -75,7 +75,9 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
                 label.text = detail.valueForKey("digest")!.description
             }
             if let label = self.detailTimestampLabel {
-                label.text = detail.valueForKey("timeStamp")!.description
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "MM-dd HH:mm"
+                label.text = formatter.stringFromDate(detail.valueForKey("timeStamp") as NSDate)
             }
             if let tagColView = self.tagCollectionView{
                 tagColView.reloadData()
@@ -112,7 +114,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue("empty", forKey: "digest")
+        newManagedObject.setValue("", forKey: "digest")
         newManagedObject.setValue(NSDate(), forKey: "timeStamp")
         
         return newManagedObject
@@ -122,19 +124,18 @@ class DetailViewController: UIViewController, UICollectionViewDataSource{
         
         if let detail: AnyObject = self.detailItem {
             if let label = self.detailDescriptionLabel {
-                self.detailItem?.setValue(label.text, forKey: "digest")
-                self.detailItem?.setValue(NSDate(), forKey: "timeStamp")
+                detail.setValue(label.text, forKey: "digest")
+                detail.setValue(NSDate(), forKey: "timeStamp")
+                
+                var error: NSError?
+                if !(self.managedObjectContext?.save(&error) != nil) {
+                    println("Could not save \(error), \(error?.userInfo)")
+                }
             }
-        }else{
-            self.performSegueWithIdentifier("showMaster", sender: self)
         }
         
-        var error: NSError?
-        if !(self.managedObjectContext?.save(&error) != nil) {
-            println("Could not save \(error), \(error?.userInfo)")
-        }
         
-        if let preView = self.navigationController?.popViewControllerAnimated(true){
+        if let preViewController = self.navigationController?.popViewControllerAnimated(true){
             return
         }
         

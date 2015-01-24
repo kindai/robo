@@ -14,7 +14,7 @@ class NoteCell : UICollectionViewCell {
     
     var dataObject:NSManagedObject?{
         didSet{
-            self.titleLabel.text = dataObject?.valueForKey("name")?.description
+            self.titleLabel.text = dataObject?.valueForKey("digest")?.description
         }
     };
     
